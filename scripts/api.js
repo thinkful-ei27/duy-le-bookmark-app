@@ -1,39 +1,35 @@
 'use strict';
 
 const api = (function(){
-  const BASE_URL = 'https://thinkful-list-api.herokuapp.com';
-
-  const MY_URL = BASE_URL + '/duy/bookmarks';
+  const BASE_URL = 'https://thinkful-list-api.herokuapp.com/Duy';
 
   const getItems = function(callback){
-    $.getJSON(`${MY_URL}`, (response) => {
-      callback(response);
-    });
+    $.getJSON(`${BASE_URL}/bookmarks`, callback); 
   };
 
-  const createItem = function(????, onError, callback){
+  const createItem = function(bookmarkItem, callback){
     $.ajax({
-      url: MY_URL,
+      url:`${BASE_URL}/bookmarks`,
       method: 'POST',
       contentType: 'application/json',
-      data: JSON.stringify(????),
+      data: JSON.stringify(bookmarkItem),
       success: callback,
       error: onError,
     });
   };
 
-  const updateItem = function(itemId, ????, callback){
+  const updateItem = function(id, updateData, callback){
     $.ajax({
-      url: MY_URL + itemId,
+      url:`${BASE_URL}/bookmarks/${id}`,
       method: 'PATCH',
       contentType: 'application/json',
-      data: JSON.stringify(????),
+      data: JSON.stringify(updateData),
       success: callback
     });
   };
-  const deleteItem = function(itemId, callback){
+  const deleteItem = function(id, callback){
     $.ajax({
-      url: MY_URL + itemId,
+      url:`${BASE_URL}/bookmarks/${id}`,
       method: 'DELETE',
       success: callback
     });
