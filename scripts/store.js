@@ -20,16 +20,27 @@ const store =(function(){
       return item.rating >= val;
     });
   }
-    
+  
+  const setDisplayDetail = function (id) {
+    const item = this.findById(id);
+    item.displayDetail = !item.displayDetail;
+  };
+
+  const setItemEditing = function (id) {
+    const item = this.findById(id);
+    item.isEditing = !item.isEditing;
+  };
+
   return {
     items: [],
-    minRating = 1,
     adding: false,
     error: null,
     
     addItem,
     findById,
     findAndDelete, 
-    filterByRating
+    filterByRating,
+    setDisplayDetail,
+    setItemEditing
   };
 })();

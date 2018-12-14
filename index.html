@@ -8,38 +8,33 @@
     <title>Bookmarks App Project</title>
 </head>
 <body>
-    <header role="banner">
-        <h1>Bookmarks</h1>
-    </header>
-
-    <main role="main">
-        <section class= "button-container" role= "region">
-                <div class ="controls">
-                    <form class="add-bookmark-form">
-                        <button class="add-bookmark" type= "submit">Add Bookmark</button>   
-                    </form>
-                    <form class="rating-filter">
-                        <select class= "rating-select">
-                            <option value="" id="rating">Minimum Rating</option>  
-                            <option value="5">5</option>
-                            <option value="4">4</option>
-                            <option value="3">3</option>
-                            <option value="2">2</option>
-                            <option value="1">1</option>
-                    </form>
-                </div>
-
-        </section>
-        <div class ="bookmark-list">
-                <ul>
-                </ul>
-            </div>
-    </main>
-    
+    <div class="container">
+        <header role="banner">
+            <h1>Bookmarks</h1></a>
+            <form id="js-create-bookmark-form">
+                <button class="header-button js-header-button" type="submit" >Add Bookmark</button>
+            </form>
+            <form id="js-filter-bookmark-form" class="filter-bookmark-form">
+                <label for="rating-filter">
+                    <select class="header-select js-header-select">
+                        <option value="" id="rating-filter">Minimum Rating</option>
+                        <option value="5" id="rating-filter-5">5 Stars</option>
+                        <option value="4" id="rating-filter-4">4 Stars</option>
+                        <option value="3" id="rating-filter-3">3 Stars</option>
+                        <option value="2" id="rating-filter-2">2 Stars</option>
+                        <option value="1" id="rating-filter-1">1 Stars</option>
+                    </select>
+                </label>
+            </form>
+        </header>
+        <main role="main" class="bookmark-panel js-bookmark-panel">
+            <ul class="bookmark-list js-bookmark-list">
+            </ul>
+        </main>
+    </div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="./scripts/api.js"></script>
-    <script src="./scripts/bookmarkItem.js"></script>
+    <script src="./scripts/api.js"></script>>
     <script src="./scripts/store.js"></script>
     <script src="./scripts/bookmarkList.js"></script>
     <script src="./scripts/index.js"></script>
