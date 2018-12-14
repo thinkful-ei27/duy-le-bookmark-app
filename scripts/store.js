@@ -6,10 +6,12 @@ const store =(function(){
     this.items.push(item);
   };
     
+  
   const findById = function(id) {
     return this.items.find(item => item.id === id);
   };
     
+
   const findAndDelete = function(id) {
     this.items = this.items.filter(item => item.id !== id);
   };
@@ -21,15 +23,12 @@ const store =(function(){
     });
   }
   
-  const setDisplayDetail = function (id) {
-    const item = this.findById(id);
-    item.displayDetail = !item.displayDetail;
-  };
 
-  const setItemEditing = function (id) {
+  const setItemEditing = function (id, isEditing) {
     const item = this.findById(id);
     item.isEditing = !item.isEditing;
   };
+
 
   return {
     items: [],
@@ -40,7 +39,6 @@ const store =(function(){
     findById,
     findAndDelete, 
     filterByRating,
-    setDisplayDetail,
     setItemEditing
   };
 })();

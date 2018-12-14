@@ -20,6 +20,7 @@ const bookmarkList = (function(){
 
 
   function generateExpandedView(item){
+    
     return `
       <li class="expand-bookmark-view js-expand-bookmark-view" data-item-id="${item.id}">
         <h2>${item.title}</h2>
@@ -35,6 +36,9 @@ const bookmarkList = (function(){
         </div>
         <form id="js-delete-bookmark">
           <button class="delete-bookmark-button js-delete-bookmark-button" type="submit">Delete</button>
+        </form>
+        <form id="js-edit-bookmark">
+          <button class="edit-bookmark-button js-edit-bookmark-button" type="submit">Edit</button>
         </form>
       </li>`;
   }
@@ -150,6 +154,18 @@ const bookmarkList = (function(){
   }
 
 
+  /*function handleEditBookmarkSubmit(){
+    $('.js-bookmark-list').on('submit', '.edit')
+  }
+ 
+  function handleEditBookmarkClicked(){
+    $('.js-bookmark-list').on('click', '.js-edit-bookmark-button', event =>{
+      const id = generateExpandedView(event.target);
+      store.setItemEditing(id, true):
+      render();
+    });
+  }*/
+
   function handleFilterByRatingClicked() {
     $('.js-header-select').on('change', function(event) {
       event.preventDefault();
@@ -173,8 +189,7 @@ const bookmarkList = (function(){
       const bookmarkForm = generateCreateBookmarkView();
       $('.js-bookmark-list').prepend(bookmarkForm);
     }
-    handleAddBookmarkClicked();
-    handleDeleteBookmarkClicked();
+    handleAddBookmarkClicked();;
     let items = store.items;
     const bookmarkString = generateBookmarkString(items);
     $('.js-bookmark-list').append(bookmarkString);
@@ -188,6 +203,8 @@ const bookmarkList = (function(){
     handleCloseBookmarkClicked();
     handleAddBookmarkClicked();
     handleDeleteBookmarkClicked();
+    //handleEditBookmarkClicked();
+    //handleEditBookmarkSubmit();
   }
 
   return {
