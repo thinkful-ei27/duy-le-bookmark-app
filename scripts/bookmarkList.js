@@ -44,7 +44,7 @@ const bookmarkList = (function(){
   }
 
 
-  function generateCreateBookmarkView() {
+  function generateCreateBookmarkView(item = {}) {
     return `
     <li class="create-bookmark-view js-create-bookmark-view">
       <h2>Create New Bookmark</h2>
@@ -53,7 +53,7 @@ const bookmarkList = (function(){
         </form>
         <form id="js-add-bookmark">
           <label for="add-bookmark-title"></label>
-          <input class="add-bookmark add-bookmark-title js-add-bookmark-title" id="add-bookmark-title" name="title" type="text" placeholder="Title" required>
+          <input value ="${item.title || ''}" class="add-bookmark add-bookmark-title js-add-bookmark-title" id="add-bookmark-title" name="title" type="text" placeholder="Title" required>
           <label for="add-bookmark-link"></label>
           <input class="add-bookmark add-bookmark-link js-add-bookmark-link" id="add-bookmark-link" name="url" type="url" value="http://" placeholder="http://url-address.com" required>
           <label for="add-bookmark-desc"></label>
@@ -118,6 +118,7 @@ const bookmarkList = (function(){
       const url = event.currentTarget.url.value;
       const desc = event.currentTarget.desc.value;
       const rate = event.currentTarget.rate.value;
+      console.log(`add bookmark`);
 
       api.createItem(title, url, desc, rate, function(response) {
         store.addItem(response);
@@ -154,17 +155,23 @@ const bookmarkList = (function(){
   }
 
 
-  /*function handleEditBookmarkSubmit(){
+  function handleEditBookmarkSubmit(){
     $('.js-bookmark-list').on('submit', '.edit')
   }
  
   function handleEditBookmarkClicked(){
     $('.js-bookmark-list').on('click', '.js-edit-bookmark-button', event =>{
-      const id = generateExpandedView(event.target);
-      store.setItemEditing(id, true):
-      render();
+      const id = getItemIdFromElement(event.currentTarget);
+      let item = store.findById(id);
+      console.log(id);
+      $(event.currentTarget).remove();
+      if(item.id === id) {
+        const expandView = generateExpandedView(item);
+        $('.js-bookmark-list').prepend(expandView);
+        store.expanded = true;
+      }
     });
-  }*/
+  }
 
   function handleFilterByRatingClicked() {
     $('.js-header-select').on('change', function(event) {
@@ -189,8 +196,9 @@ const bookmarkList = (function(){
       const bookmarkForm = generateCreateBookmarkView();
       $('.js-bookmark-list').prepend(bookmarkForm);
     }
-    handleAddBookmarkClicked();;
+    handleAddBookmarkClicked();
     let items = store.items;
+    console.log('render form');
     const bookmarkString = generateBookmarkString(items);
     $('.js-bookmark-list').append(bookmarkString);
   }
@@ -203,7 +211,7 @@ const bookmarkList = (function(){
     handleCloseBookmarkClicked();
     handleAddBookmarkClicked();
     handleDeleteBookmarkClicked();
-    //handleEditBookmarkClicked();
+    handleEditBookmarkClicked();
     //handleEditBookmarkSubmit();
   }
 

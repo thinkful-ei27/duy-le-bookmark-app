@@ -9,7 +9,7 @@ const api = (function(){
   };
 
 
-  const createItem = function(title, url, desc, rating, onError, callback){
+  const createItem = function(title, url, desc, rating, callback, onError){
     const newItem = JSON.stringify(
       {
         id: cuid(),
